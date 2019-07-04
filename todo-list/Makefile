@@ -8,7 +8,9 @@ run-server:
         -db-user=root \
         -db-password=toor \
         -grpc-port=9090 \
-		-http-port=9091
+		-http-port=9091 \
+		-log-level=-1 \
+		-log-time-format=2006-01-02T15:04:05.999999999Z07:00
 
 .PHONY: run-grpc-client
 run-grpc-client:

@@ -7,9 +7,15 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.3.3
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.1
+	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
 	github.com/grpc-ecosystem/grpc-gateway v1.9.3
 	github.com/kr/pty v1.1.8 // indirect
+	github.com/pkg/errors v0.8.1 // indirect
 	github.com/rogpeppe/fastuuid v1.1.0 // indirect
+	github.com/stretchr/testify v1.3.0 // indirect
+	go.uber.org/atomic v1.4.0 // indirect
+	go.uber.org/multierr v1.1.0 // indirect
+	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/exp v0.0.0-20190627132806-fd42eb6b336f // indirect
 	golang.org/x/image v0.0.0-20190703141733-d6a02ce849c9 // indirect
