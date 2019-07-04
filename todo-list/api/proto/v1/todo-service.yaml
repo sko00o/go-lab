@@ -1,0 +1,41 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: v1.ToDoService.Create
+      post: "/v1/todo"
+      body: "*"
+
+    - selector: v1.ToDoService.ReadAll
+      get: "/v1/todo/all"
+
+    - selector: v1.ToDoService.Read
+      get: "/v1/todo/{id}"
+
+    - selector: v1.ToDoService.Update
+      put: "/v1/todo/{toDo.id}"
+      body: "*"
+      additional_bindings:
+        - patch: "/v1/todo/{toDo.id}"
+          body: "*"
+
+    - selector: v1.ToDoService.Delete
+      delete: "/v1/todo/{id}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
