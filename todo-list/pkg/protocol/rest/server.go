@@ -13,6 +13,7 @@ import (
 
 	v1 "github.com/sko00o/go-lab/todo-list/pkg/api/v1"
 	"github.com/sko00o/go-lab/todo-list/pkg/logger"
+	"github.com/sko00o/go-lab/todo-list/pkg/protocol/rest/middleware"
 )
 
 func RunServer(ctx context.Context, grpcPort, httpPort string) error {
@@ -27,7 +28,7 @@ func RunServer(ctx context.Context, grpcPort, httpPort string) error {
 
 	srv := &http.Server{
 		Addr:    ":" + httpPort,
-		Handler: mux,
+		Handler: middleware.AddRequestID(middleware.AddLogger(logger.Log, mux)),
 	}
 
 	c := make(chan os.Signal, 1)
