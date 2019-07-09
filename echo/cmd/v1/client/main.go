@@ -19,13 +19,10 @@ const (
 )
 
 func main() {
-	keyPair, certPool := cert.GetCert()
-	_ = keyPair
-
+	_, certPool := cert.GetCert()
 	var opts []grpc.DialOption
 	creds := credentials.NewClientTLSFromCert(certPool, address)
 	opts = append(opts, grpc.WithTransportCredentials(creds))
-
 	conn, err := grpc.Dial(address, opts...)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
