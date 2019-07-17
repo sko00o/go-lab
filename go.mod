@@ -7,6 +7,7 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.3.3
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/golang/protobuf v1.3.1
+	github.com/google/go-cmp v0.3.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
 	github.com/grpc-ecosystem/grpc-gateway v1.9.3
 	github.com/kr/pty v1.1.8 // indirect
