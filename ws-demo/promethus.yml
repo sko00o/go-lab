@@ -1,0 +1,6 @@
+scrape_configs:
+- job_name: ws-demo
+  scrape_interval: 100s
+  static_configs:
+  - targets:
+    - localhost:6666
