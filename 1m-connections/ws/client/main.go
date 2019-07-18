@@ -37,14 +37,17 @@ Example usage: ./client -ip=127.0.0.1:6666 -conn=10
 		}
 
 		conns = append(conns, c)
-		defer func() {
-			c.WriteControl(
+	}
+
+	defer func() {
+		for _, c := range conns {
+			_ = c.WriteControl(
 				websocket.CloseMessage,
 				websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""),
 				time.Now().Add(10*time.Millisecond))
 			c.Close()
-		}()
-	}
+		}
+	}()
 
 	tts := time.Second
 	if *connections > 100 {
@@ -55,10 +58,15 @@ Example usage: ./client -ip=127.0.0.1:6666 -conn=10
 			time.Sleep(tts)
 			conn := conns[i]
 			log.Printf("Conn %d sending message", i)
-			if err := conn.WriteControl(websocket.PingMessage, nil, time.Now().Add(time.Second*5)); err != nil {
+			if err := conn.WriteControl(
+				websocket.PingMessage,
+				nil,
+				time.Now().Add(time.Second*5)); err != nil {
 				fmt.Printf("Failed to receive pong: %v", err)
 			}
-			conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("Hello from conn %v", i)))
+			conn.WriteMessage(
+				websocket.TextMessage,
+				[]byte(fmt.Sprintf("Hello from conn %v", i)))
 		}
 	}
 }

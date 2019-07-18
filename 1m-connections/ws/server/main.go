@@ -23,7 +23,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := Add(conn); err != nil {
+	if err := epoller.Add(conn); err != nil {
 		log.Printf("Failed to add connetion")
 		conn.Close()
 	}
@@ -52,12 +52,10 @@ func main() {
 
 	recordMetrics()
 
-	//runtime.GOMAXPROCS(runtime.NumCPU)
-
 	http.HandleFunc("/", wsHandler)
 	http.Handle("/metrics", promhttp.Handler())
 	log.Printf("server on localhost:6666")
-	if err := http.ListenAndServe("localhost:6666", nil); err != nil {
+	if err := http.ListenAndServe(":6666", nil); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -80,7 +78,7 @@ func recordMetrics() {
 
 func Start() {
 	for {
-		connections, err := Wait()
+		connections, err := epoller.Wait()
 		if err != nil {
 			log.Printf("Failed to epoll wait %v", err)
 			continue
@@ -91,7 +89,7 @@ func Start() {
 				break
 			}
 			if msg, _, err := wsutil.ReadClientData(conn); err != nil {
-				if err := Remove(conn); err != nil {
+				if err := epoller.Remove(conn); err != nil {
 					log.Printf("Failed to remove %v", err)
 				}
 			} else {

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	_ "net/http/pprof"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 
 	go func() {
 		if err := http.ListenAndServe(":6060", nil); err != nil {
-			log.Fatalf("pprof failed: %v")
+			log.Fatalf("pprof failed: %v", err)
 		}
 	}()
 
@@ -39,6 +40,7 @@ func main() {
 			return
 		}
 
+		// goroutine-pre-conn pattern
 		go handleConn(conn)
 		connections = append(connections, conn)
 		if len(connections)%100 == 0 {
