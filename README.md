@@ -1,4 +1,3 @@
 # go-lab
 
-
-My code lab for practice here.
+My code practice in go.
