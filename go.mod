@@ -14,6 +14,8 @@ require (
 	github.com/gorilla/websocket v1.4.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
 	github.com/grpc-ecosystem/grpc-gateway v1.9.3
+	github.com/mattn/go-runewidth v0.0.4 // indirect
+	github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
 	github.com/prometheus/client_golang v1.0.0
 	github.com/rs/zerolog v1.14.3
 	github.com/sirupsen/logrus v1.4.2 // indirect
