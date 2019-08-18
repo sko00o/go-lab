@@ -1,5 +1,7 @@
 # ref
 
+Collection about Go interviews.
+
 [golang面试笔试题](https://zhuanlan.zhihu.com/interview)
 
 [Golang实践与心得](https://zhuanlan.zhihu.com/c_125474475)
