@@ -1,3 +1,3 @@
 # demo
 
-surfing on open source project, and give it a try.
+Surfing on open source projects, and give it a try.

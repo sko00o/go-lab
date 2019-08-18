@@ -18,22 +18,16 @@ type Album struct {
 	Type   string `json:"type,omitempty"`
 }
 
-type Artist struct {
-	ID   string `json:"id,omitempty"`
-	Name string `json:"name,omitempty"`
-	Type string `json:"type,omitempty"`
-}
-
 type Song struct {
 	ID       string `json:"id,omitempty"`
-	Album    string `json:"ablum,omitempty"`
+	Album    string `json:"album,omitempty"`
 	Title    string `json:"title,omitempty"`
 	Duration string `json:"duration,omitempty"`
 	Type     string `json:"type,omitempty"`
 }
 
-var albums []Album = []Album{
-	Album{
+var albums = []Album{
+	{
 		ID:     "ts-fearless",
 		Artist: "1",
 		Title:  "Fearless",
@@ -42,23 +36,15 @@ var albums []Album = []Album{
 	},
 }
 
-var artists []Artist = []Artist{
-	Artist{
-		ID:   "1",
-		Name: "Taylor Swift",
-		Type: "artist",
-	},
-}
-
-var songs []Song = []Song{
-	Song{
+var songs = []Song{
+	{
 		ID:       "1",
 		Album:    "ts-fearless",
 		Title:    "Fearless",
 		Duration: "4:01",
 		Type:     "song",
 	},
-	Song{
+	{
 		ID:       "2",
 		Album:    "ts-fearless",
 		Title:    "Fifteen",
@@ -86,21 +72,6 @@ func main() {
 			},
 		},
 	})
-
-	// artistType := graphql.NewObject(graphql.ObjectConfig{
-	// 	Name: "Artist",
-	// 	Fields: graphql.Fields{
-	// 		"id": &graphql.Field{
-	// 			Type: graphql.String,
-	// 		},
-	// 		"name": &graphql.Field{
-	// 			Type: graphql.String,
-	// 		},
-	// 		"type": &graphql.Field{
-	// 			Type: graphql.String,
-	// 		},
-	// 	},
-	// })
 
 	albumType := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Album",

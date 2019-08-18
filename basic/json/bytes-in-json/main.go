@@ -21,11 +21,7 @@ type J3 struct {
 }
 
 func main() {
-	data := `{"a":"b","c":"d","e":{"f":"g","h":{"i":"j"}}}`
-	b, err := json.Marshal(data)
-	if err != nil {
-		fmt.Printf("marshal error: %v", err)
-	}
+	b := []byte(`{"a":"b","c":"d","e":{"f":"g","h":{"i":"j"}}}`)
 	outJ := J{
 		ID:   1,
 		Data: b,

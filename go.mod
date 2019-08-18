@@ -8,7 +8,6 @@ require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/auth0/go-jwt-middleware v0.0.0-20190805220309-36081240882b
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
@@ -31,15 +30,12 @@ require (
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/muesli/cache2go v0.0.0-20190807050245-881fe569ffa0
 	github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
-	github.com/onsi/ginkgo v1.8.0
-	github.com/onsi/gomega v1.5.0
 	github.com/prometheus/client_golang v1.0.0
 	github.com/rs/zerolog v1.14.3
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/soheilhy/cmux v0.1.4
-	github.com/urfave/cli v1.21.0
 	github.com/urfave/negroni v1.0.0 // indirect
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect

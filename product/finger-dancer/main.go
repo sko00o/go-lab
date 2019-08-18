@@ -48,52 +48,6 @@ loop:
 	}
 }
 
-func judge(ev *termbox.Event, k *key) bool {
-	if ev.Ch == k.ch {
-		return true
-	} else if ev.Ch == 0 &&
-		ev.Key == termbox.KeySpace &&
-		k.ch == rune(' ') {
-		return true
-	}
-	return false
-}
-
-type key struct {
-	x, y int
-	ch   rune
-
-	s statInt
-}
-
-type stat struct {
-	fg termbox.Attribute
-	bg termbox.Attribute
-}
-
-type statInt int
-
-const (
-	Unknown statInt = iota
-	Wrong
-	Right
-	Current
-)
-
-func (s statInt) Stat() *stat {
-	switch s {
-	case Unknown:
-		return &stat{fg: termbox.ColorWhite, bg: termbox.ColorBlack}
-	case Wrong:
-		return &stat{fg: termbox.ColorYellow, bg: termbox.ColorRed}
-	case Right:
-		return &stat{fg: termbox.ColorGreen, bg: termbox.ColorBlack}
-	case Current:
-		return &stat{fg: termbox.ColorWhite, bg: termbox.ColorBlue}
-	}
-	return &stat{fg: termbox.ColorDefault, bg: termbox.ColorDefault}
-}
-
 func initStr(str string) (out keys) {
 	var xIdx, yIdx int
 	for idx, r := range str {
@@ -117,6 +71,24 @@ func initStr(str string) (out keys) {
 	return
 }
 
+func judge(ev *termbox.Event, k *key) bool {
+	if ev.Ch == k.ch {
+		return true
+	} else if ev.Ch == 0 &&
+		ev.Key == termbox.KeySpace &&
+		k.ch == rune(' ') {
+		return true
+	}
+	return false
+}
+
+type key struct {
+	x, y int
+	ch   rune
+
+	s statInt
+}
+
 type keys []key
 
 func (k keys) draw() {
@@ -126,4 +98,32 @@ func (k keys) draw() {
 		termbox.SetCell(e.x, e.y, e.ch, s.fg, s.bg)
 	}
 	termbox.Flush()
+}
+
+type statInt int
+
+const (
+	Unknown statInt = iota
+	Wrong
+	Right
+	Current
+)
+
+type stat struct {
+	fg termbox.Attribute
+	bg termbox.Attribute
+}
+
+func (s statInt) Stat() *stat {
+	switch s {
+	case Unknown:
+		return &stat{fg: termbox.ColorWhite, bg: termbox.ColorBlack}
+	case Wrong:
+		return &stat{fg: termbox.ColorYellow, bg: termbox.ColorRed}
+	case Right:
+		return &stat{fg: termbox.ColorGreen, bg: termbox.ColorBlack}
+	case Current:
+		return &stat{fg: termbox.ColorWhite, bg: termbox.ColorBlue}
+	}
+	return &stat{fg: termbox.ColorDefault, bg: termbox.ColorDefault}
 }

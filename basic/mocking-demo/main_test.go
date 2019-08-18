@@ -37,8 +37,8 @@ Go!`
 			sleep, write,
 		}
 
-		if !reflect.DeepEqual(want, Calls) {
-			t.Errorf("want calls %v got %v", want, Calls)
+		if !reflect.DeepEqual(want, spySleepPrinter.Calls) {
+			t.Errorf("want calls %v got %v", want, spySleepPrinter.Calls)
 		}
 	})
 }
