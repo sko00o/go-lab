@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mosaic</title>
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6">
+        <img src="data:image/jpg;base64,{{ .original }}" width="100%" alt=""/>
+        <div class="lead">Original</div>
+    </div>
+    <div class="col-md-6">
+        <img src="data:image/jpg;base64,{{ .mosaic }}" width="100%" alt=""/>
+        <div class="lead">Mosaic - {{ .duration }}</div>
+    </div>
+    <div class="col-md-12 center">
+        <a class="btn btn-lg btn-info" href="/">Go back</a>
+    </div>
+</div>
+</body>
+</html>
