@@ -137,5 +137,5 @@ func main() {
 }
 
 func draw(x, y int, ch rune) {
-	termbox.SetCell(y, x, ch, termbox.ColorGreen, termbox.ColorBlack)
+	termbox.SetCell(y, x, ch, termbox.ColorGreen, termbox.ColorDefault)
 }
