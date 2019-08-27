@@ -1,4 +1,6 @@
-package main
+// +build linux
+
+package epoll
 
 import (
 	"log"
@@ -10,26 +12,26 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type epoll struct {
+type Epoll struct {
 	fd          int
 	connections map[int]net.Conn
 	lock        *sync.RWMutex
 }
 
-func MkEpoll() (*epoll, error) {
+func MkEpoll() (*Epoll, error) {
 	fd, err := unix.EpollCreate1(0)
 	if err != nil {
 		return nil, err
 	}
 
-	return &epoll{
+	return &Epoll{
 		fd:          fd,
 		lock:        &sync.RWMutex{},
 		connections: make(map[int]net.Conn),
 	}, nil
 }
 
-func (e *epoll) Add(conn net.Conn) error {
+func (e *Epoll) Add(conn net.Conn) error {
 	fd := socketFD(conn)
 	err := unix.EpollCtl(e.fd, syscall.EPOLL_CTL_ADD, fd, &unix.EpollEvent{
 		Events: unix.POLLIN | unix.POLLHUP,
@@ -47,7 +49,7 @@ func (e *epoll) Add(conn net.Conn) error {
 	return nil
 }
 
-func (e *epoll) Remove(conn net.Conn) error {
+func (e *Epoll) Remove(conn net.Conn) error {
 	fd := socketFD(conn)
 	err := unix.EpollCtl(e.fd, syscall.EPOLL_CTL_DEL, fd, nil)
 	if err != nil {
@@ -62,7 +64,7 @@ func (e *epoll) Remove(conn net.Conn) error {
 	return nil
 }
 
-func (e *epoll) Wait() ([]net.Conn, error) {
+func (e *Epoll) Wait() ([]net.Conn, error) {
 	events := make([]unix.EpollEvent, 100)
 	n, err := unix.EpollWait(e.fd, events, 100)
 	if err != nil {

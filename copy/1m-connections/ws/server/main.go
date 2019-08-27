@@ -23,7 +23,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := Add(conn); err != nil {
+	if err := epoller.Add(conn); err != nil {
 		log.Printf("Failed to add connetion")
 		conn.Close()
 	}
@@ -78,7 +78,7 @@ func recordMetrics() {
 
 func Start() {
 	for {
-		connections, err := Wait()
+		connections, err := epoller.Wait()
 		if err != nil {
 			log.Printf("Failed to epoll wait %v", err)
 			continue
@@ -89,7 +89,7 @@ func Start() {
 				break
 			}
 			if msg, _, err := wsutil.ReadClientData(conn); err != nil {
-				if err := Remove(conn); err != nil {
+				if err := epoller.Remove(conn); err != nil {
 					log.Printf("Failed to remove %v", err)
 				}
 			} else {
