@@ -14,12 +14,9 @@ import (
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	// c := make(chan string)
-	// echo(c)
 	for {
-		fmt.Fprint(os.Stdout, ">> ")
+		fmt.Print(">> ")
 		input, err := reader.ReadString('\n')
-		// c <- input
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
@@ -44,6 +41,9 @@ func execInput(input string) error {
 	input = strings.TrimSuffix(input, "\n")
 	args := strings.Split(input, " ")
 	// check build-in command
+
+	c := make(chan string)
+	echo(c)
 	switch args[0] {
 	case "cd":
 		if len(args) < 2 {
@@ -57,6 +57,11 @@ func execInput(input string) error {
 		os.Exit(0)
 	case "ip":
 		fmt.Fprintf(os.Stdout, whereIP(args[1]))
+		return nil
+	case "echo":
+		if len(args) > 1 {
+			c <- fmt.Sprint(args[1:])
+		}
 		return nil
 	}
 	cmd := exec.Command(args[0], args[1:]...)

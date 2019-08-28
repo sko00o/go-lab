@@ -26,11 +26,13 @@ require (
 	github.com/issue9/assert v1.3.3 // indirect
 	github.com/jroimartin/gocui v0.4.0
 	github.com/labstack/gommon v0.3.0
+	github.com/libp2p/go-reuseport v0.0.1
 	github.com/mattn/go-runewidth v0.0.4 // indirect
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/muesli/cache2go v0.0.0-20190807050245-881fe569ffa0
 	github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
 	github.com/prometheus/client_golang v1.0.0
+	github.com/rcrowley/go-metrics v0.0.0-20190826022208-cac0b30c2563
 	github.com/rs/zerolog v1.14.3
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect

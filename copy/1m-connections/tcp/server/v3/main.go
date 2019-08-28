@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"io"
 	"log"
 	"net"
 	"net/http"
@@ -16,14 +15,11 @@ import (
 
 	"github.com/sko00o/go-lab/copy/1m-connections/tcp/epoll"
 	"github.com/sko00o/go-lab/copy/1m-connections/tcp/limit"
+	"github.com/sko00o/go-lab/copy/1m-connections/tcp/pool"
 )
 
 var (
 	c = flag.Int("c", 10, "concurrency")
-)
-
-var (
-	opsRate = metrics.NewRegisteredMeter("ops", nil)
 )
 
 func main() {
@@ -38,29 +34,35 @@ func main() {
 		}
 	}()
 
-	// multi epoller
-	for i := 0; i < *c; i++ {
-		go startEpoll()
+	epoller, err := epoll.MkEpoll()
+	if err != nil {
+		panic(err)
 	}
+	workerPool := pool.NewPool(*c, 1000000, func(conn net.Conn) {
+		if err := epoller.Remove(conn); err != nil {
+			log.Printf("failed to remove %v", err)
+		}
+		conn.Close()
+	})
+	workerPool.Start()
+
+	go start(epoller, workerPool)
+
+	startEpoll(epoller)
 
 	// wait stop signal
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
+
+	workerPool.Close()
 }
 
-func startEpoll() {
-	epoller, err := epoll.MkEpoll()
-	if err != nil {
-		panic(err)
-	}
-	go start(epoller)
-
+func startEpoll(epoller *epoll.Epoll) {
 	ln, err := reuseport.Listen("tcp", ":8964")
 	if err != nil {
 		panic(err)
 	}
-
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
@@ -81,7 +83,7 @@ func startEpoll() {
 	}
 }
 
-func start(epoller *epoll.Epoll) {
+func start(epoller *epoll.Epoll, workerPool *pool.Pool) {
 	for {
 		connections, err := epoller.Wait()
 		if err != nil {
@@ -94,15 +96,7 @@ func start(epoller *epoll.Epoll) {
 				break
 			}
 
-			// 将消息原样写回
-			if _, err := io.CopyN(conn, conn, 8); err != nil {
-				if err := epoller.Remove(conn); err != nil {
-					log.Printf("failed to remove %v", err)
-				}
-				conn.Close()
-			}
-
-			opsRate.Mark(1)
+			workerPool.AddTask(conn)
 		}
 	}
 }
