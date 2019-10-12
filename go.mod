@@ -7,6 +7,7 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/auth0/go-jwt-middleware v0.0.0-20190805220309-36081240882b
+	github.com/cheekybits/genny v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
@@ -38,6 +39,7 @@ require (
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/soheilhy/cmux v0.1.4
+	github.com/stretchr/testify v1.4.0
 	github.com/urfave/negroni v1.0.0 // indirect
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
