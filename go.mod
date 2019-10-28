@@ -25,6 +25,8 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.9.3
 	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc
 	github.com/issue9/assert v1.3.3 // indirect
+	github.com/jinzhu/gorm v1.9.11
+	github.com/jmoiron/sqlx v1.2.0
 	github.com/jroimartin/gocui v0.4.0
 	github.com/labstack/gommon v0.3.0
 	github.com/libp2p/go-reuseport v0.0.1
@@ -38,6 +40,7 @@ require (
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337
 	github.com/soheilhy/cmux v0.1.4
 	github.com/stretchr/testify v1.4.0
 	github.com/urfave/negroni v1.0.0 // indirect
