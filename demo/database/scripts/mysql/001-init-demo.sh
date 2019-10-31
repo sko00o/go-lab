@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mysql -u root -e "create database demo_test" -ptoor
+mysql -u root -e "create database if not exists demo_test" -ptoor
