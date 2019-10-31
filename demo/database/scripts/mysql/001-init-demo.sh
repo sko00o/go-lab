@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mysql -u root -e "create database testdb" -ptoor
+mysql -u root -e "create database demo_test" -ptoor
