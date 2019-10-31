@@ -1,34 +1,39 @@
-package transaction
+package database
 
 import (
 	"strconv"
 	"testing"
 
-	"github.com/jinzhu/gorm"
 	. "github.com/smartystreets/goconvey/convey"
+	"xorm.io/xorm"
 
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
+	_ "github.com/ziutek/mymysql/godrv"
+
+	"github.com/sko00o/go-lab/demo/database/test"
 )
 
-var dsnTable = map[string]string{
-	"mysql":    "root:toor@tcp(localhost:13306)/demo_test?parseTime=True",
-	"postgres": "dbname=demo_test user=root password=toor port=15432 sslmode=disable",
-}
-
 func TestPeople(t *testing.T) {
-	for driver, source := range dsnTable {
+	for driver, source := range test.DSNTable {
 		Convey("test by "+driver, t, func() {
-			db, err := gorm.Open(driver, source)
+			db, err := xorm.NewEngine(driver, source)
 			So(err, ShouldBeNil)
+
+			//db.ShowSQL(true)
 
 			Reset(func() {
 				So(db.Close(), ShouldBeNil)
 			})
 
 			Convey("clean database", func() {
-				db.DropTableIfExists(&People{})
-				db.CreateTable(&People{})
+				table := new(People)
+				exist, err := db.IsTableExist(table)
+				So(err, ShouldBeNil)
+				if exist {
+					So(db.DropTables(table), ShouldBeNil)
+				}
+				So(db.CreateTables(table), ShouldBeNil)
 
 				Convey("create peoples", func() {
 					// make people
@@ -70,8 +75,11 @@ func TestPeople(t *testing.T) {
 					})
 
 					Convey("get peoples by age range lock", func() {
-						tx := db.Begin()
-						defer tx.Rollback()
+						tx := db.NewSession()
+						So(tx.Begin(), ShouldBeNil)
+						defer func() {
+							So(tx.Rollback(), ShouldBeNil)
+						}()
 						getPs, err := QueryByAgeRangeLock(tx, 1, 3)
 						So(err, ShouldBeNil)
 
@@ -80,8 +88,11 @@ func TestPeople(t *testing.T) {
 						}
 						So(getPs, ShouldResemble, ps[1:4])
 
-						tx2 := db.Begin()
-						defer tx2.Rollback()
+						tx2 := db.NewSession()
+						So(tx2.Begin(), ShouldBeNil)
+						defer func() {
+							So(tx2.Rollback(), ShouldBeNil)
+						}()
 						getPs, err = QueryByAgeRangeLock(tx2, 1, 7)
 						So(err, ShouldBeNil)
 

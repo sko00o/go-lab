@@ -1,4 +1,4 @@
-package transaction
+package database
 
 import (
 	"time"
@@ -7,10 +7,10 @@ import (
 )
 
 type People struct {
-	ID        uint       `gorm:"primary_key"`
-	CreatedAt time.Time  `db:"created_at"`
-	UpdatedAt time.Time  `db:"updated_at"`
-	DeletedAt *time.Time `sql:"index" db:"deleted_at"`
+	ID        uint `gorm:"primary_key"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time `sql:"index"`
 
 	Name string
 	Age  int

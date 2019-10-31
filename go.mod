@@ -29,6 +29,7 @@ require (
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/jroimartin/gocui v0.4.0
 	github.com/labstack/gommon v0.3.0
+	github.com/lib/pq v1.1.1
 	github.com/libp2p/go-reuseport v0.0.1
 	github.com/mattn/go-runewidth v0.0.4 // indirect
 	github.com/mitchellh/mapstructure v1.1.2
@@ -44,6 +45,7 @@ require (
 	github.com/soheilhy/cmux v0.1.4
 	github.com/stretchr/testify v1.4.0
 	github.com/urfave/negroni v1.0.0 // indirect
+	github.com/ziutek/mymysql v1.5.4
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0
@@ -53,4 +55,5 @@ require (
 	google.golang.org/genproto v0.0.0-20190701230453-710ae3a149df
 	google.golang.org/grpc v1.22.0
 	gopkg.in/macaron.v1 v1.3.4
+	xorm.io/xorm v0.8.0
 )
