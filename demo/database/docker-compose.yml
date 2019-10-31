@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  postgresql:
+    image: postgres:9.6-alpine
+    ports:
+      - 15432:5432
+    volumes:
+      - ./scripts/postgresql:/docker-entrypoint-initdb.d
+      - postgresqldata:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 13306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+    volumes:
+      - ./scripts/mysql:/docker-entrypoint-initdb.d
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  postgresqldata:
+  mysqldata:
