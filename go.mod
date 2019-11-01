@@ -12,6 +12,7 @@ require (
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/gobuffalo/packr v1.30.1 // indirect
 	github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee // indirect
 	github.com/gobwas/pool v0.2.0 // indirect
 	github.com/gobwas/ws v1.0.2
@@ -38,9 +39,9 @@ require (
 	github.com/prometheus/client_golang v1.0.0
 	github.com/rcrowley/go-metrics v0.0.0-20190826022208-cac0b30c2563
 	github.com/rs/zerolog v1.14.3
+	github.com/rubenv/sql-migrate v0.0.0-20191025130928-9355dd04f4b3
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337
 	github.com/soheilhy/cmux v0.1.4
 	github.com/stretchr/testify v1.4.0
@@ -49,11 +50,13 @@ require (
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0
+	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
 	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
 	golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/genproto v0.0.0-20190701230453-710ae3a149df
 	google.golang.org/grpc v1.22.0
+	gopkg.in/gorp.v1 v1.7.2 // indirect
 	gopkg.in/macaron.v1 v1.3.4
 	xorm.io/xorm v0.8.0
 )
