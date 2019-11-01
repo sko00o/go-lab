@@ -115,3 +115,30 @@ func QueryByAgeRangeLock(db sqlx.Ext, min, max int) (ps []People, err error) {
 	}
 	return
 }
+
+func QueryByAgeRangeLimitLock(db sqlx.Ext, min, max int, limit int) (ps []People, err error) {
+	rows, err := sqlx.NamedQuery(db, `
+		SELECT p.* 
+		FROM peoples p
+		WHERE age BETWEEN :min AND :max 
+		LIMIT :limit
+		FOR UPDATE OF p SKIP LOCKED`,
+		map[string]interface{}{
+			"min":   min,
+			"max":   max,
+			"limit": limit,
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var p People
+		if err = rows.StructScan(&p); err != nil {
+			return
+		}
+		ps = append(ps, p)
+	}
+	return
+}
