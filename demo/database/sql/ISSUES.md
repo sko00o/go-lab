@@ -53,7 +53,7 @@ SELECT * FROM seats WHERE seat_no BETWEEN 3 AND 4
 ```
 
 ```sql
---tx2
+-- tx2
 SELECT object_name, index_name, lock_type, lock_mode, lock_data
 FROM performance_schema.data_locks WHERE object_name = 'seats';
 ```
