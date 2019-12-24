@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	google2 "github.com/sko00o/go-lab/basic/context-demo/google"
-	userip2 "github.com/sko00o/go-lab/basic/context-demo/userip"
+	"github.com/sko00o/go-lab/basic/context/go-blog-demo/google"
+	"github.com/sko00o/go-lab/basic/context/go-blog-demo/userip"
 )
 
 func main() {
@@ -36,16 +36,16 @@ func handleSearch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userIP, err := userip2.FromRequest(r)
+	userIP, err := userip.FromRequest(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	ctx = userip2.NewContext(ctx, userIP)
+	ctx = userip.NewContext(ctx, userIP)
 
 	start := time.Now()
-	res, err := google2.Search(ctx, query)
+	res, err := google.Search(ctx, query)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -53,7 +53,7 @@ func handleSearch(w http.ResponseWriter, r *http.Request) {
 	elapsed := time.Since(start)
 
 	if err := resultsTemplate.Execute(w, struct {
-		Results          google2.Results
+		Results          google.Results
 		Timeout, Elapsed time.Duration
 	}{
 		Results: res,
