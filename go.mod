@@ -39,10 +39,12 @@ require (
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/muesli/cache2go v0.0.0-20190807050245-881fe569ffa0
 	github.com/nsf/termbox-go v0.0.0-20190624072549-eeb6cd0a1762
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/prometheus/client_golang v1.0.0
 	github.com/rcrowley/go-metrics v0.0.0-20190826022208-cac0b30c2563
 	github.com/rs/zerolog v1.14.3
 	github.com/rubenv/sql-migrate v0.0.0-20191025130928-9355dd04f4b3
+	github.com/segmentio/kafka-go v0.3.4
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/sirupsen/logrus v1.4.2
@@ -57,6 +59,7 @@ require (
 	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20191002192127-34f69633bfdc
 	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58
 	golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/genproto v0.0.0-20190701230453-710ae3a149df
