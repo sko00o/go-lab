@@ -46,27 +46,34 @@ func Run(o Options) error {
 				doneChan <- err
 				return
 			}
-			logger.Debug().Msgf("packet-received: bytes=%d from=%s", n, addr)
 
 			// process
-			logger.Info().Msgf("receive: [%x]", buffer[:n])
+			logger.Info().
+				Int("size", n).
+				Str("from", addr.String()).
+				Hex("data", buffer[:n]).
+				Msg("RX")
 
 			// send back
 			if o.SendBack {
-				deadline := time.Now().Add(o.Timeout)
-				err = conn.SetWriteDeadline(deadline)
-				if err != nil {
-					doneChan <- err
-					return
-				}
-				n, err = conn.WriteTo(buffer[:n], addr)
-				if err != nil {
-					doneChan <- err
-					return
-				}
-				logger.Debug().Msgf("packet-written: bytes=%d to=%s", n, addr)
+				go func(conn net.PacketConn, addr net.Addr, timeout time.Duration) {
+					deadline := time.Now().Add(timeout)
+					err = conn.SetWriteDeadline(deadline)
+					if err != nil {
+						doneChan <- err
+						return
+					}
+					n, err = conn.WriteTo(buffer[:n], addr)
+					if err != nil {
+						doneChan <- err
+						return
+					}
+					logger.Info().
+						Int("size", n).
+						Str("to", addr.String()).
+						Msg("TX")
+				}(conn, addr, o.Timeout)
 			}
-
 		}
 	}()
 

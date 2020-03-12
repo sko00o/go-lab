@@ -23,8 +23,6 @@ var (
 	willReceive = flag.Bool("r", false, "will receive")
 	timeout     = flag.Duration("t", 5*time.Second, "receive timeout")
 
-	debugMode = flag.Bool("debug", false, "enable debug mode")
-
 	logger zerolog.Logger
 
 	sig chan os.Signal
@@ -39,11 +37,6 @@ func init() {
 	logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr}).
 		With().Str("component", "client").
 		Logger()
-	if *debugMode {
-		logger = logger.Level(zerolog.DebugLevel)
-	} else {
-		logger = logger.Level(zerolog.InfoLevel)
-	}
 }
 
 func main() {
@@ -59,7 +52,7 @@ func main() {
 		}
 		switch *mode {
 		case "auto":
-			c.Reader = autoGen()
+			c.Reader = defaultReader()
 		case "input":
 			fmt.Println("type what you want, hit enter to go.")
 			c.Reader = os.Stdin
@@ -81,16 +74,21 @@ func main() {
 	}
 }
 
-type dd struct {
-	idx int32
+type dataReader struct {
+	idx   int32
+	delay time.Duration
 }
 
-func (d *dd) Read(p []byte) (n int, err error) {
+func (d *dataReader) Read(p []byte) (n int, err error) {
 	binary.BigEndian.PutUint16(p, uint16(d.idx))
 	d.idx = (d.idx + 1) % (1 << 16)
+	time.Sleep(d.delay)
 	return 2, nil
 }
 
-func autoGen() (r io.Reader) {
-	return &dd{idx: 1}
+func defaultReader() (r io.Reader) {
+	return &dataReader{
+		idx:   1,
+		delay: 10 * time.Millisecond,
+	}
 }

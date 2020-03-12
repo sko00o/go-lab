@@ -19,8 +19,6 @@ var (
 	sendBack = flag.Bool("b", false, "will send back")
 	timeout  = flag.Duration("t", 5*time.Second, "send timeout")
 
-	debugMode = flag.Bool("debug", false, "enable debug mode")
-
 	logger zerolog.Logger
 
 	sig chan os.Signal
@@ -35,11 +33,6 @@ func init() {
 	logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr}).
 		With().Str("component", "server").
 		Logger()
-	if *debugMode {
-		logger = logger.Level(zerolog.DebugLevel)
-	} else {
-		logger = logger.Level(zerolog.InfoLevel)
-	}
 }
 
 func main() {

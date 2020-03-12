@@ -26,12 +26,7 @@ type Client struct {
 func (c *Client) Run() error {
 	ctx, address, reader, logger := c.Ctx, c.Addr, c.Reader, c.Logger
 
-	rAddr, err := net.ResolveUDPAddr("udp", address)
-	if err != nil {
-		return err
-	}
-
-	conn, err := net.DialUDP("udp", nil, rAddr)
+	conn, err := net.Dial("udp", address)
 	if err != nil {
 		return err
 	}
@@ -83,15 +78,10 @@ func (c *Client) Run() error {
 	}
 }
 
-func (c *Client) receive(ctx context.Context, conn *net.UDPConn, timeout time.Duration) error {
+func (c *Client) receive(ctx context.Context, conn net.Conn, timeout time.Duration) error {
 	for {
-		deadline := time.Now().Add(timeout)
-		err := conn.SetReadDeadline(deadline)
-		if err != nil {
-			return err
-		}
 		buffer := make([]byte, maxBufferSize)
-		n, addr, err := conn.ReadFrom(buffer)
+		n, err := conn.Read(buffer)
 		if err != nil {
 			// timeout error will not in log error
 			if err, ok := err.(net.Error); ok && err.Timeout() {
@@ -99,8 +89,10 @@ func (c *Client) receive(ctx context.Context, conn *net.UDPConn, timeout time.Du
 			}
 			return err
 		}
-		c.Logger.Debug().Msgf("packet-received: bytes=%d from=%s", n, addr)
-
-		c.Logger.Info().Msgf("receive: [%x]", buffer[:n])
+		c.Logger.Info().
+			Int("size", n).
+			Str("from", conn.RemoteAddr().String()).
+			Hex("data", buffer[:n]).
+			Msg("RX")
 	}
 }
