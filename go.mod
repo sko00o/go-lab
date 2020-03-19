@@ -10,6 +10,7 @@ require (
 	github.com/cheekybits/genny v1.0.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gizak/termui/v3 v3.1.0
+	github.com/go-ocf/go-coap v0.0.0-20191205091034-1fba24d18397
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gobuffalo/packr v1.30.1 // indirect
@@ -50,9 +51,9 @@ require (
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0
-	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
-	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
-	golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a
+	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf
+	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582
+	golang.org/x/sys v0.0.0-20191010194322-b09406accb47
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/genproto v0.0.0-20190701230453-710ae3a149df
 	google.golang.org/grpc v1.22.0
