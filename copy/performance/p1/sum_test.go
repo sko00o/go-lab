@@ -1,4 +1,4 @@
-package sum
+package p1
 
 import (
 	"testing"

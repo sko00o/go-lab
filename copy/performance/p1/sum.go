@@ -1,4 +1,4 @@
-package sum
+package p1
 
 //测试数据
 var testData = CreateTestData()

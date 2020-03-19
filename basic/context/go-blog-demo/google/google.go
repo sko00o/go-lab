@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	userip2 "github.com/sko00o/go-lab/basic/context-demo/userip"
+	"github.com/sko00o/go-lab/basic/context/go-blog-demo/userip"
 )
 
 type Results []Result
@@ -25,7 +25,7 @@ func Search(ctx context.Context, query string) (Results, error) {
 	q.Set("q", query)
 	q.Set("key", Key)
 
-	if userIP, ok := userip2.FromContext(ctx); !ok {
+	if userIP, ok := userip.FromContext(ctx); !ok {
 		q.Set("userIp", userIP.String())
 	}
 	req.URL.RawQuery = q.Encode()
