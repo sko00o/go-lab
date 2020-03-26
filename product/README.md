@@ -1,3 +1,0 @@
-# Product
-
-learn -> practice -> product.
