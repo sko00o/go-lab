@@ -11,7 +11,7 @@ import (
 	"github.com/patrickmn/go-cache"
 	"github.com/sirupsen/logrus"
 
-	"github.com/sko00o/go-lab/product/flood/kafka"
+	kafka2 "github.com/sko00o/go-lab/demo/kafka/flood/kafka"
 )
 
 var log = logrus.WithField("app", "flood")
@@ -37,7 +37,7 @@ func main() {
 	var client MQ
 
 	// init kafka client
-	client = kafka.Setup(kafka.Config{
+	client = kafka2.Setup(kafka2.Config{
 		Brokers: Brokers,
 		GroupID: GroupID,
 		Topic:   Topic,
