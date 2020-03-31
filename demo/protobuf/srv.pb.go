@@ -8,6 +8,8 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -65,7 +67,9 @@ func init() {
 	proto.RegisterType((*StringMessage)(nil), "example.StringMessage")
 }
 
-func init() { proto.RegisterFile("srv.proto", fileDescriptor_2bbe8325d22c1a26) }
+func init() {
+	proto.RegisterFile("srv.proto", fileDescriptor_2bbe8325d22c1a26)
+}
 
 var fileDescriptor_2bbe8325d22c1a26 = []byte{
 	// 120 bytes of a gzipped FileDescriptorProto
@@ -81,11 +85,11 @@ var fileDescriptor_2bbe8325d22c1a26 = []byte{
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // YourServiceClient is the client API for YourService service.
 //
@@ -95,10 +99,10 @@ type YourServiceClient interface {
 }
 
 type yourServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewYourServiceClient(cc *grpc.ClientConn) YourServiceClient {
+func NewYourServiceClient(cc grpc.ClientConnInterface) YourServiceClient {
 	return &yourServiceClient{cc}
 }
 
@@ -114,6 +118,14 @@ func (c *yourServiceClient) Echo(ctx context.Context, in *StringMessage, opts ..
 // YourServiceServer is the server API for YourService service.
 type YourServiceServer interface {
 	Echo(context.Context, *StringMessage) (*StringMessage, error)
+}
+
+// UnimplementedYourServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedYourServiceServer struct {
+}
+
+func (*UnimplementedYourServiceServer) Echo(ctx context.Context, req *StringMessage) (*StringMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Echo not implemented")
 }
 
 func RegisterYourServiceServer(s *grpc.Server, srv YourServiceServer) {
