@@ -11,6 +11,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/go-ocf/go-coap v0.0.0-20191205091034-1fba24d18397
+	github.com/go-rod/rod v0.106.6
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gobwas/ws v1.0.2
 	github.com/golang/protobuf v1.3.2
@@ -98,6 +99,9 @@ require (
 	github.com/urfave/negroni v1.0.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.0.1 // indirect
+	github.com/ysmood/goob v0.4.0 // indirect
+	github.com/ysmood/gson v0.7.1 // indirect
+	github.com/ysmood/leakless v0.7.0 // indirect
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	golang.org/x/term v0.0.0-20210220032956-6a3ed077a48d // indirect
