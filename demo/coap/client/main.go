@@ -11,7 +11,7 @@ import (
 func main() {
 	co, err := coap.Dial("udp", "0.0.0.0:5688")
 	if err != nil {
-		log.Fatal("Err dialog: %v", err)
+		log.Fatalf("Err dialog: %v", err)
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
