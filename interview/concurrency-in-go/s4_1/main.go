@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// `or channel` 的实现
+// 'or' channel
 
 func or(channels ...<-chan interface{}) <-chan interface{} {
 	switch len(channels) {

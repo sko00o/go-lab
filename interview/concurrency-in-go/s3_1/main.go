@@ -50,4 +50,7 @@ run on linux: go1.12, go1.12.4 linux/amd64
 
 run on windows: go1.11.5, go1.12.5 windows/amd64
 8.7958kb
+
+run on macOS: go1.19.1 darwin/arm64
+2.620kb
 */

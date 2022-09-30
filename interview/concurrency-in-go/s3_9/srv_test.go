@@ -7,7 +7,7 @@ import (
 )
 
 /*
-go test -benchtime=10s -run=^$ -bench=^(BenchmarkNetworkRequest2)$
+go test -benchtime=10s -run="^$" -bench="^(BenchmarkNetworkRequest2)$"
 
 startNetworkDaemon()
 goos: linux
