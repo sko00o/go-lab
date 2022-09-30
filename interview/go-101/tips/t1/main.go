@@ -16,4 +16,6 @@ func main() {
 	// and "f()" is unspecified.
 	(*a)[i] = f()
 	fmt.Println(*a)
+	// Output:
+	// [7 0 9]
 }
