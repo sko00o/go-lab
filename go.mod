@@ -1,6 +1,6 @@
 module github.com/sko00o/go-lab
 
-go 1.17
+go 1.19
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.3.3
