@@ -1,7 +1,10 @@
 .PHONY: run requirements
 
+all: requirements run
+
 run:
 	go generate .
+	cat gen_*
 
 requirements:
-	go get github.com/cheekybits/genny
+	test -x genny || go get github.com/cheekybits/genny
