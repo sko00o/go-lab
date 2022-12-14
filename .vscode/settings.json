@@ -1,7 +1,0 @@
-{
-    "go.languageServerFlags": [
-      "serve",
-      "-rpc.trace",
-      "--debug=localhost:6060",
-  ],
-}
