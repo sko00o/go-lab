@@ -51,7 +51,7 @@ require (
 	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf
 	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58
-	golang.org/x/sys v0.0.0-20210309074719-68d13333faf2
+	golang.org/x/sys v0.1.0
 	google.golang.org/genproto v0.0.0-20190701230453-710ae3a149df
 	google.golang.org/grpc v1.22.0
 	gopkg.in/macaron.v1 v1.3.4
